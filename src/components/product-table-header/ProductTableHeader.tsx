@@ -12,7 +12,7 @@ export const ProductTableHeader: React.FC<IProductTableHeader> = React.memo(
             <TableCell
               sx={headerStyles}
               key={index}
-              colSpan={title === "Actions" ? 2 : 0}
+              colSpan={title === "Actions" ? 2 : 1}
             >
               {title}
             </TableCell>

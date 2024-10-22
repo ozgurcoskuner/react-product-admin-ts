@@ -1,10 +1,10 @@
 export const inStockStyle = {
-  backgroundColor: "#DFFFD6",
+  backgroundColor: "#DFF0D8",
   color: "#155724",
 };
 
 export const noStockStyle = {
-  backgroundColor: "#f2aab0",
+  backgroundColor: "#F2DEDE",
   color: "#721C24",
 };
 

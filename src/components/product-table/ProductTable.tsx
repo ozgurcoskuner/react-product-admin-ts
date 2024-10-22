@@ -1,10 +1,11 @@
 import React from "react";
 
-import { TableContainer, Table, TableBody } from "@mui/material";
+import { TableContainer, Table, TableBody, Box } from "@mui/material";
 import { ProductTableHeader } from "../product-table-header/ProductTableHeader";
 import { ProductTableRow } from "../product-table-row/ProductTableRow";
 
 import { IProductTable } from "./types";
+import { tableContainerStyle } from "./styles";
 export const ProductTable: React.FC<IProductTable> = React.memo(
   ({ products, deleteProduct, updateProduct }) => {
     const headerTitles = [
@@ -17,8 +18,8 @@ export const ProductTable: React.FC<IProductTable> = React.memo(
       "Actions",
     ];
     return (
-      <>
-        <TableContainer>
+      <Box>
+        <TableContainer sx={tableContainerStyle}>
           <Table>
             <ProductTableHeader headers={headerTitles} />
             <TableBody>
@@ -33,7 +34,7 @@ export const ProductTable: React.FC<IProductTable> = React.memo(
             </TableBody>
           </Table>
         </TableContainer>
-      </>
+      </Box>
     );
   }
 );

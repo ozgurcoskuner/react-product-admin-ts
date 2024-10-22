@@ -3,6 +3,7 @@ import { ProductControls } from "../product-controls";
 import axios from "axios";
 import { IProduct, StockFilters } from "./types";
 import { ProductTable } from "../product-table";
+import { noProductsStyles } from "./styles";
 
 export const ProductManagement: React.FC = React.memo(() => {
   const [selectedStockFilter, setSelectedStockFilter] = useState<StockFilters>(
@@ -96,7 +97,7 @@ export const ProductManagement: React.FC = React.memo(() => {
         addProduct={addProduct}
       />
       {products.length === 0 ? (
-        <h2>There're no products</h2>
+        <div style={noProductsStyles}>There're no products</div>
       ) : (
         <ProductTable
           products={products}
