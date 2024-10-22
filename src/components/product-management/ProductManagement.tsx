@@ -5,6 +5,8 @@ import { IProduct, StockFilters } from "./types";
 import { ProductTable } from "../product-table";
 import { noProductsStyles } from "./styles";
 
+const apiUrl = "http://localhost:4000/api/products";
+
 export const ProductManagement: React.FC = React.memo(() => {
   const [selectedStockFilter, setSelectedStockFilter] = useState<StockFilters>(
     StockFilters.All
@@ -15,7 +17,7 @@ export const ProductManagement: React.FC = React.memo(() => {
   const fetchProducts = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/products?stock=${selectedStockFilter}&min=${minPrice}&max=${maxPrice}&sortBy=${sortBy}`
+        `${apiUrl}?stock=${selectedStockFilter}&min=${minPrice}&max=${maxPrice}&sortBy=${sortBy}`
       );
       setProducts(response.data);
     } catch (error) {
@@ -29,7 +31,7 @@ export const ProductManagement: React.FC = React.memo(() => {
 
   const deleteProduct = useCallback(async (id: string) => {
     try {
-      await axios.delete(`http://localhost:4000/api/products/${id}`);
+      await axios.delete(`${apiUrl}/${id}`);
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product._id !== id)
       );
@@ -42,7 +44,7 @@ export const ProductManagement: React.FC = React.memo(() => {
       const updatedProductId = updatedProduct.get("_id");
 
       const response = await axios.put(
-        `http://localhost:4000/api/products/${updatedProductId}`,
+        `${apiUrl}/${updatedProductId}`,
         updatedProduct,
         {
           headers: {
@@ -61,15 +63,11 @@ export const ProductManagement: React.FC = React.memo(() => {
   }, []);
   const addProduct = useCallback(async (newProduct: FormData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/products",
-        newProduct,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(apiUrl, newProduct, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setProducts((prevProducts) => [...prevProducts, response.data]);
     } catch (error) {
       console.log(error);
